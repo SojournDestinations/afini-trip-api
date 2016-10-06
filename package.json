@@ -1,0 +1,32 @@
+{
+  "name": "afini-trip-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_CONFIG_DIR=\"./node_modules/afini-common-library/config\" node server.js",
+    "dropDB": "NODE_CONFIG_DIR=\"./node_modules/afini-common-library/config\" node database/drop.js",
+    "seedDB": "NODE_CONFIG_DIR=\"./node_modules/afini-common-library/config\" node database/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SojournDestinations/afini-trip-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SojournDestinations/afini-trip-api/issues"
+  },
+  "homepage": "https://github.com/SojournDestinations/afini-trip-api#readme",
+  "dependencies": {
+    "afini-common-library": "git+ssh://git@github.com/SojournDestinations/afini-common-library.git",
+    "afini-rabbitmq-plugin": "git+ssh://git@github.com/SojournDestinations/afini-rabbitmq-plugin.git",
+    "body-parser": "^1.15.2",
+    "config": "^1.21.0",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.3",
+    "rabbot": "^1.0.6"
+  }
+}
