@@ -1,4 +1,75 @@
+const tripDate = new Date().getUTCDate()
+
 const trips = [
+  // Past trip
+  {
+    tripID: '998',
+    accountID: 1,
+    name: 'Germany Sep 09, 2016',
+    reservations: [
+      {
+        reservationID: 'p1p1p1',
+        checkIn: '2016-09-01',
+        checkOut: '2016-09-04'
+      }
+    ],
+    status: 'active',
+    flightInfo: [
+      {
+        airline: 'American',
+        arrivalTime: '10:40 AM',
+        departureTime: '12:30 PM',
+        arrivalDate: '2016-09-01',
+        departureDate: '2016-09-04'
+      }
+    ]
+  },
+  // Past trip
+  {
+    tripID: '999',
+    accountID: 1,
+    name: 'Sydney Oct 10, 2016',
+    reservations: [
+      {
+        reservationID: 'p2p2p2',
+        checkIn: '2016-10-01',
+        checkOut: '2016-10-04'
+      }
+    ],
+    status: 'active',
+    flightInfo: [
+      {
+        airline: 'American',
+        arrivalTime: '10:40 AM',
+        departureTime: '12:30 PM',
+        arrivalDate: '2016-10-01',
+        departureDate: '2016-10-04'
+      }
+    ]
+  },
+  // Mock trip for today's date
+  {
+    tripID: '000',
+    accountID: 1,
+    name: 'Todays trip',
+    reservations: [
+      {
+        reservationID: 'a1a1a1',
+        checkIn: '2016-10-' + tripDate,
+        checkOut: '2016-10-' + (tripDate + 5)
+      }
+    ],
+    status: 'active',
+    flightInfo: [
+      {
+        airline: 'American',
+        arrivalTime: '10:40 AM',
+        departureTime: '12:30 PM',
+        arrivalDate: '',
+        departureDate: ''
+      }
+    ]
+  },
   {
     tripID: '101',
     accountID: 1,
