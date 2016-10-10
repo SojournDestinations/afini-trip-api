@@ -28,6 +28,7 @@ const getAccountTrips = (req, res, next) => {
 
           let tripData = {
             tripID: trip.tripID,
+            name: trip.name,
             start: finalStartDate,
             end: finalEndDate,
             status: trip.status
