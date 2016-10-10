@@ -15,7 +15,9 @@ const dbConfig = config.get('db-connection')
 require('./database/dbSetup')(dbConfig)
 
 const getAccountTrips = require('./middleware/getAccountTrips')
-router.route('/:accountID').get(getAccountTrips)
+const getTripByReservationID = require('./middleware/getTripByReservationID')
+router.route('/reservation/:reservationID').get(getTripByReservationID)
+router.route('/account/:accountID').get(getAccountTrips)
 
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
