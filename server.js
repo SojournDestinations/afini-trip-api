@@ -14,6 +14,9 @@ const dbConfig = config.get('db-connection')
 // MongoDB connection setup
 require('./database/dbSetup')(dbConfig)
 
+const getTripsByAccountID = require('./middleware/getTripsByAccountID')
+router.route('/:accountID').get(getTripsByAccountID)
+
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
   console.log('healthcheck')
