@@ -15,10 +15,10 @@ const dbConfig = config.get('db-connection')
 require('./database/dbSetup')(dbConfig)
 
 // Trip Routes
-const getAccountTrips = require('./middleware/getAccountTrips')
-const getTripByReservationID = require('./middleware/getTripByReservationID')
-router.route('/reservation/:reservationID').get(getTripByReservationID)
-router.route('/account/:accountID').get(getAccountTrips)
+const trip = require('./middleware/trip')
+router.route('/reservation/:reservationID').get(trip.getTripByReservationID)
+router.route('/account/:accountID').get(trip.getAccountTrips)
+router.route('/:tripID').put(trip.updateTripName)
 
 // Itinerary Routes
 const getItinerary = require('./middleware/getItinerary')
