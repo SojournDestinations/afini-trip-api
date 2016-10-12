@@ -95,6 +95,7 @@ const updateTripName = (req, res, next) => {
           reservations: updatedTrip.reservations
         }
 
+        console.log('Trip name updated to ' + newName)
         return res.status(200).json(formattedTrip)
       }
     })

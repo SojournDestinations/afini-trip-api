@@ -21,12 +21,16 @@ router.route('/account/:accountID').get(trip.getAccountTrips)
 router.route('/:tripID').put(trip.updateTripName)
 
 // Itinerary Routes
-const getItinerary = require('./middleware/getItinerary')
-const addItem = require('./middleware/addItem')
-const updateItem = require('./middleware/updateItem')
-router.route('/:tripID/itinerary').get(getItinerary)
-router.route('/:tripID/itinerary/addItem').post(addItem)
-router.route('/:tripID/itinerary/updateItem').put(updateItem)
+const itinerary = require('./middleware/itinerary')
+router.route('/:tripID/itinerary').get(itinerary.getItinerary)
+router.route('/:tripID/itinerary/addItem').post(itinerary.addItem)
+router.route('/:tripID/itinerary/updateItem').put(itinerary.updateItem)
+
+// Guest Routes
+const guests = require('./middleware/guests')
+router.route('/:tripID/guests').get(guests.getGuests)
+router.route('/:tripID/guests/addGuest').post(guests.addGuest)
+// router.route('/:tripID/guests/removeGuest').delete(guests.removeGuest)
 
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
