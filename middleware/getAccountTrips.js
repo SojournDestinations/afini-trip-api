@@ -28,10 +28,12 @@ const getAccountTrips = (req, res, next) => {
 
           let tripData = {
             tripID: trip.tripID,
+            accountID: trip.accountID,
             name: trip.name,
             start: finalStartDate,
             end: finalEndDate,
-            status: trip.status
+            status: trip.status,
+            reservations: trip.reservations
           }
           tripList.push(tripData)
         }
