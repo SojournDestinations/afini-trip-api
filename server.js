@@ -14,15 +14,24 @@ const dbConfig = config.get('db-connection')
 // MongoDB connection setup
 require('./database/dbSetup')(dbConfig)
 
+// Trip Routes
 const getAccountTrips = require('./middleware/getAccountTrips')
 const getTripByReservationID = require('./middleware/getTripByReservationID')
 router.route('/reservation/:reservationID').get(getTripByReservationID)
 router.route('/account/:accountID').get(getAccountTrips)
 
+// Itinerary Routes
+const getItinerary = require('./middleware/getItinerary')
+const addItem = require('./middleware/addItem')
+const updateItem = require('./middleware/updateItem')
+router.route('/:tripID/itinerary').get(getItinerary)
+router.route('/:tripID/itinerary/addItem').post(addItem)
+router.route('/:tripID/itinerary/updateItem').put(updateItem)
+
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
   console.log('healthcheck')
-  res.status(200).send('service: trip-api')
+  return res.status(200).send('service: trip-api')
 })
 
 healthcheckRouter.route('/healthbad').get((req, res) => {

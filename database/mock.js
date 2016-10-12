@@ -6,21 +6,37 @@ const trips = [
     tripID: '998',
     accountID: 1,
     name: 'Germany Sep 09, 2016',
+    status: 'active',
+    guests: [
+      {
+        name: 'John Doe',
+        email: 'johndoe@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'p1p1p1',
+        residenceID: '5',
         checkIn: '2016-09-01',
         checkOut: '2016-09-04'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'American',
-        arrivalTime: '10:40 AM',
-        departureTime: '12:30 PM',
-        arrivalDate: '2016-09-01',
-        departureDate: '2016-09-04'
+        itemID: 'item998-1',
+        date: '2016-09-01',
+        type: 'flight',
+        time: '09:00',
+        status: 'approved',
+        description: 'Southwest flight arrives'
+      },
+      {
+        itemID: 'item998-2',
+        date: '2016-09-04',
+        type: 'flight',
+        time: '11:30',
+        status: 'approved',
+        description: 'Southwest flight departs'
       }
     ]
   },
@@ -29,21 +45,37 @@ const trips = [
     tripID: '999',
     accountID: 1,
     name: 'Sydney Oct 10, 2016',
+    status: 'active',
+    guests: [
+      {
+        name: 'Bill Murray',
+        email: 'billmurray@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'p2p2p2',
+        residenceID: '2',
         checkIn: '2016-10-01',
         checkOut: '2016-10-04'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'American',
-        arrivalTime: '10:40 AM',
-        departureTime: '12:30 PM',
-        arrivalDate: '2016-10-01',
-        departureDate: '2016-10-04'
+        itemID: 'item999-1',
+        date: '2016-10-01',
+        type: 'flight',
+        time: '10:40',
+        status: 'approved',
+        description: 'American flight arrives'
+      },
+      {
+        itemID: 'item999-2',
+        date: '2016-10-04',
+        type: 'flight',
+        time: '13:30',
+        status: 'approved',
+        description: 'American flight departs'
       }
     ]
   },
@@ -52,21 +84,37 @@ const trips = [
     tripID: '000',
     accountID: 1,
     name: 'Todays trip',
+    status: 'active',
+    guests: [
+      {
+        name: 'Nicolas Cage',
+        email: 'nicolascage@email.com'
+      }
+    ],
     reservations: [
       {
-        reservationID: 'a1a1a1',
+        reservationID: 'f4f4f4',
+        residenceID: '4',
         checkIn: '2016-10-' + tripDate,
         checkOut: '2016-10-' + (tripDate + 5)
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'American',
-        arrivalTime: '10:40 AM',
-        departureTime: '12:30 PM',
-        arrivalDate: '',
-        departureDate: ''
+        itemID: 'item000-1',
+        date: '2016-10-' + tripDate,
+        type: 'flight',
+        time: '19:40',
+        status: 'approved',
+        description: 'Delta flight arrives'
+      },
+      {
+        itemID: 'item000-2',
+        date: '2016-10-' + (tripDate + 5),
+        type: 'flight',
+        time: '11:15',
+        status: 'approved',
+        description: 'Delta flight departs'
       }
     ]
   },
@@ -74,21 +122,37 @@ const trips = [
     tripID: '101',
     accountID: 1,
     name: 'Tuscany Jan 01, 2017',
+    status: 'active',
+    guests: [
+      {
+        name: 'Willem Dafoe',
+        email: 'willemdafoe@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'a1a1a1',
+        residenceID: '1',
         checkIn: '2017-01-01',
         checkOut: '2017-01-04'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'American',
-        arrivalTime: '10:40 AM',
-        departureTime: '12:30 PM',
-        arrivalDate: '2017-01-01',
-        departureDate: '2017-01-04'
+        itemID: 'item101-1',
+        date: '2017-01-01',
+        type: 'flight',
+        time: '20:00',
+        status: 'approved',
+        description: 'Lufthansa flight arrives'
+      },
+      {
+        itemID: 'item101-2',
+        date: '2017-01-04',
+        type: 'flight',
+        time: '16:15',
+        status: 'approved',
+        description: 'Lufthansa flight departs'
       }
     ]
   },
@@ -96,21 +160,41 @@ const trips = [
     tripID: '102',
     accountID: 1,
     name: 'Bali Feb 01, 2017',
+    status: 'active',
+    guests: [
+      {
+        name: 'Ryne Sandberg',
+        email: 'rynesandberg@email.com'
+      },
+      {
+        name: 'Mark Grace',
+        email: 'markgrace@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'b2b2b2',
+        residenceID: '2',
         checkIn: '2017-02-01',
         checkOut: '2017-02-05'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'Lufthansa',
-        arrivalTime: '10:40 AM',
-        departureTime: '12:30 PM',
-        arrivalDate: '2017-02-01',
-        departureDate: '2017-02-05'
+        itemID: 'item102-1',
+        date: '2017-02-01',
+        type: 'flight',
+        time: '14:25',
+        status: 'approved',
+        description: 'American flight arrives'
+      },
+      {
+        itemID: 'item102-2',
+        date: '2017-02-05',
+        type: 'flight',
+        time: '13:00',
+        status: 'approved',
+        description: 'American flight departs'
       }
     ]
   },
@@ -118,21 +202,41 @@ const trips = [
     tripID: '201',
     accountID: 2,
     name: 'Bali May 01, 2017',
+    status: 'active',
+    guests: [
+      {
+        name: 'Addison Russell',
+        email: 'addisonrussell@email.com'
+      },
+      {
+        name: 'Javier Baez',
+        email: 'javierbaez@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'c2c2c2',
+        residenceID: '2',
         checkIn: '2017-05-01',
         checkOut: '2017-05-04'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'United',
-        arrivalTime: '11:40 PM',
-        departureTime: '09:30 AM',
-        arrivalDate: '2017-05-01',
-        departureDate: '2017-05-04'
+        itemID: 'item201-1',
+        date: '2017-05-01',
+        type: 'flight',
+        time: '11:00',
+        status: 'approved',
+        description: 'Delta flight arrives'
+      },
+      {
+        itemID: 'item201-2',
+        date: '2017-05-04',
+        type: 'flight',
+        time: '08:15',
+        status: 'approved',
+        description: 'Delta flight departs'
       }
     ]
   },
@@ -140,21 +244,37 @@ const trips = [
     tripID: '202',
     accountID: 2,
     name: 'Phuket Dec 01, 2016',
+    status: 'active',
+    guests: [
+      {
+        name: 'Anthony Rizzo',
+        email: 'anthonyrizzo@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'd3d3d3',
-        checkIn: '2017-12-01',
-        checkOut: '2017-12-05'
+        residenceID: '3',
+        checkIn: '2016-12-01',
+        checkOut: '2016-12-05'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'Southwest',
-        arrivalTime: '01:40 PM',
-        departureTime: '4:15 PM',
-        arrivalDate: '2016-12-01',
-        departureDate: '2016-12-05'
+        itemID: 'item202-1',
+        date: '2016-12-01',
+        type: 'flight',
+        time: '13:40',
+        status: 'approved',
+        description: 'Southwest flight arrives'
+      },
+      {
+        itemID: 'item202-2',
+        date: '2016-12-05',
+        type: 'flight',
+        time: '16:15',
+        status: 'approved',
+        description: 'Southwest flight departs'
       }
     ]
   },
@@ -162,21 +282,41 @@ const trips = [
     tripID: '301',
     accountID: 3,
     name: 'Phuket Jan 15, 2017',
+    status: 'active',
+    guests: [
+      {
+        name: 'Joe Maddon',
+        email: 'joemaddon@email.com'
+      },
+      {
+        name: 'Theo Epstein',
+        email: 'theoepstein@email.com'
+      }
+    ],
     reservations: [
       {
         reservationID: 'e3e3e3',
+        residenceID: '3',
         checkIn: '2017-01-15',
         checkOut: '2017-01-19'
       }
     ],
-    status: 'active',
-    flightInfo: [
+    itinerary: [
       {
-        airline: 'Southwest',
-        arrivalTime: '01:40 PM',
-        departureTime: '4:15 PM',
-        arrivalDate: '2017-01-15',
-        departureDate: '2017-01-19'
+        itemID: 'item301-1',
+        date: '2017-01-15',
+        type: 'flight',
+        time: '12:40',
+        status: 'approved',
+        description: 'Delta flight arrives'
+      },
+      {
+        itemID: 'item301-2',
+        date: '2017-01-19',
+        type: 'flight',
+        time: '05:45',
+        status: 'approved',
+        description: 'Delta flight departs'
       }
     ]
   }
