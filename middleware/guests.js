@@ -41,18 +41,48 @@ const addGuest = (req, res, next) => {
   }
 }
 
-// const removeGuest = (req, res, next) => {
-//   if (req.params.tripID && req.body.name) {
-//     let tripID = req.params.tripID
-//     let name = req.params.name
-//
-//     Trip.findOneAndUpdate({tripID: tripID}, {$pull: {'trip.guests': {name: $}}})
-//   } else {
-//     return res.status(400).json({ message: 'Missing tripID to remove guest' })
-//   }
-// }
+const updateGuest = (req, res, next) => {
+  if (req.params.tripID && req.body.name && req.body.email) {
+    let tripID = req.params.tripID
+    let name = req.body.name
+    let email = req.body.email
+
+    Trip.findOneAndUpdate({tripID: tripID, 'guests.name': name}, {$set: {'guests.$': {name: name, email: email}}}, {new: true}, (err, updatedTrip) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'System error updating guest' })
+      } else {
+        console.log('guest updated')
+        return res.status(200).json(updatedTrip.guests)
+      }
+    })
+  } else {
+    return res.status(400).json({ message: 'Missing parameters to update guest list' })
+  }
+}
+
+const removeGuest = (req, res, next) => {
+  if (req.params.tripID && req.body.name) {
+    let tripID = req.params.tripID
+    let name = req.body.name
+
+    Trip.findOneAndUpdate({tripID: tripID}, {$pull: {guests: {name: {$in: name}}}}, {new: true}, (err, updatedTrip) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'System error removing guest' })
+      } else {
+        console.log('Guest removed from trip')
+        return res.status(200).json(updatedTrip.guests)
+      }
+    })
+  } else {
+    return res.status(400).json({ message: 'Missing tripID to remove guest' })
+  }
+}
 
 module.exports = {
   addGuest: addGuest,
-  getGuests: getGuests
+  getGuests: getGuests,
+  updateGuest: updateGuest,
+  removeGuest: removeGuest
 }

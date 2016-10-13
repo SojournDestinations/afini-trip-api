@@ -25,12 +25,14 @@ const itinerary = require('./middleware/itinerary')
 router.route('/:tripID/itinerary').get(itinerary.getItinerary)
 router.route('/:tripID/itinerary/addItem').post(itinerary.addItem)
 router.route('/:tripID/itinerary/updateItem').put(itinerary.updateItem)
+router.route('/:tripID/itinerary/removeItem').delete(itinerary.removeItem)
 
 // Guest Routes
 const guests = require('./middleware/guests')
 router.route('/:tripID/guests').get(guests.getGuests)
 router.route('/:tripID/guests/addGuest').post(guests.addGuest)
-// router.route('/:tripID/guests/removeGuest').delete(guests.removeGuest)
+router.route('/:tripID/guests/updateGuest').put(guests.updateGuest)
+router.route('/:tripID/guests/removeGuest').delete(guests.removeGuest)
 
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {

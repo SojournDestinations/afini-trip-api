@@ -48,11 +48,12 @@ const addItem = (req, res, next) => {
 
 // Entire itinerary item needs to be sent in request body
 const updateItem = (req, res, next) => {
-  if (req.body.itemID) {
+  if (req.params.tripID && req.body.itemID) {
+    let tripID = req.params.tripID
     let itemID = req.body.itemID
     let data = req.body
 
-    Trip.findOneAndUpdate({'itinerary.itemID': itemID}, {$set: {'itinerary.$': data}}, {new: true}, (err, updatedTrip) => {
+    Trip.findOneAndUpdate({tripID: tripID, 'itinerary.itemID': itemID}, {new: true}, {$set: {'itinerary.$': data}}, {new: true}, (err, updatedTrip) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error updating itinerary item' })
@@ -66,8 +67,28 @@ const updateItem = (req, res, next) => {
   }
 }
 
+const removeItem = (req, res, next) => {
+  if (req.params.tripID && req.body.itemID) {
+    let tripID = req.params.tripID
+    let itemID = req.body.itemID
+
+    Trip.findOneAndUpdate({tripID: tripID}, {$pull: {itinerary: {itemID: itemID}}}, {new: true}, (err, updatedTrip) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'System error removing itinerary item' })
+      } else {
+        console.log('itinerary item removed')
+        return res.status(200).json(updatedTrip.itinerary)
+      }
+    })
+  } else {
+    return res.status(400).json({ message: 'Missing tripID or itemID to remove itinerary item' })
+  }
+}
+
 module.exports = {
   getItinerary: getItinerary,
   addItem: addItem,
-  updateItem: updateItem
+  updateItem: updateItem,
+  removeItem: removeItem
 }
