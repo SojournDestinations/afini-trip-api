@@ -16,7 +16,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'p1p1p1',
-        residenceID: '5',
+        residenceID: 'gggg-7777-gggg-7777',
         checkIn: '2016-09-01',
         checkOut: '2016-09-04'
       }
@@ -55,7 +55,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'p2p2p2',
-        residenceID: '2',
+        residenceID: 'eeee-5555-eeee-5555',
         checkIn: '2016-10-01',
         checkOut: '2016-10-04'
       }
@@ -94,7 +94,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'f4f4f4',
-        residenceID: '4',
+        residenceID: 'ffff-6666-ffff-6666',
         checkIn: '2016-10-' + tripDate,
         checkOut: '2016-10-' + (tripDate + 5)
       }
@@ -132,7 +132,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'a1a1a1',
-        residenceID: '1',
+        residenceID: 'eeee-5555-eeee-5555',
         checkIn: '2017-01-01',
         checkOut: '2017-01-04'
       }
@@ -174,7 +174,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'b2b2b2',
-        residenceID: '2',
+        residenceID: 'gggg-7777-gggg-7777',
         checkIn: '2017-02-01',
         checkOut: '2017-02-05'
       }
@@ -216,7 +216,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'c2c2c2',
-        residenceID: '2',
+        residenceID: 'ffff-6666-ffff-6666',
         checkIn: '2017-05-01',
         checkOut: '2017-05-04'
       }
@@ -254,7 +254,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'd3d3d3',
-        residenceID: '3',
+        residenceID: 'eeee-5555-eeee-5555',
         checkIn: '2016-12-01',
         checkOut: '2016-12-05'
       }
@@ -296,7 +296,7 @@ const trips = [
     reservations: [
       {
         reservationID: 'e3e3e3',
-        residenceID: '3',
+        residenceID: 'eeee-5555-eeee-5555',
         checkIn: '2017-01-15',
         checkOut: '2017-01-19'
       }
