@@ -20,6 +20,7 @@
   "homepage": "https://github.com/SojournDestinations/afini-trip-api#readme",
   "dependencies": {
     "afini-common-library": "git+ssh://git@github.com/SojournDestinations/afini-common-library.git",
+    "afini-itops-authorizationplugin": "git+ssh://git@github.com/SojournDestinations/afini-itops-authorizationplugin.git",
     "afini-rabbitmq-plugin": "git+ssh://git@github.com/SojournDestinations/afini-rabbitmq-plugin.git",
     "body-parser": "^1.15.2",
     "config": "^1.21.0",

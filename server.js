@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const router = express.Router()
 const healthcheckRouter = express.Router()
+const authPlugin = require('afini-itops-authorizationplugin')
 // const rabbotRapper = require('afini-rabbitmq-plugin')
 
 // Configuration setup
@@ -16,23 +17,16 @@ require('./database/dbSetup')(dbConfig)
 
 // Trip Routes
 const trip = require('./middleware/trip')
-router.route('/reservation/:reservationID').get(trip.getTripByReservationID)
-router.route('/account/:accountID').get(trip.getAccountTrips)
-router.route('/:tripID').put(trip.updateTripName)
+router.route('/:accountID').get(trip.getAccountTrips)
+router.route('/:accountID/:tripID').put(trip.updateTripName)
+// router.route('/:accountID/reservation/:reservationID').get(trip.getTripByReservationID)
 
 // Itinerary Routes
 const itinerary = require('./middleware/itinerary')
-router.route('/:tripID/itinerary').get(itinerary.getItinerary)
-router.route('/:tripID/itinerary/addItem').post(itinerary.addItem)
-router.route('/:tripID/itinerary/updateItem').put(itinerary.updateItem)
-router.route('/:tripID/itinerary/removeItem').delete(itinerary.removeItem)
-
-// Guest Routes
-const guests = require('./middleware/guests')
-router.route('/:tripID/guests').get(guests.getGuests)
-router.route('/:tripID/guests/addGuest').post(guests.addGuest)
-router.route('/:tripID/guests/updateGuest').put(guests.updateGuest)
-router.route('/:tripID/guests/removeGuest').delete(guests.removeGuest)
+router.route('/:accountID/:tripID/itinerary').get(authPlugin.authorize, authPlugin.authenticate, itinerary.getItinerary)
+router.route('/:accountID/:tripID/itinerary/addItem').post(itinerary.addItem)
+router.route('/:accountID/:tripID/itinerary/updateItem').put(itinerary.updateItem)
+router.route('/:accountID/:tripID/itinerary/removeItem').delete(itinerary.removeItem)
 
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {

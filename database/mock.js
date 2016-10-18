@@ -7,12 +7,6 @@ const trips = [
     accountID: 1,
     name: 'Germany Sep 09, 2016',
     status: 'active',
-    guests: [
-      {
-        name: 'John Doe',
-        email: 'johndoe@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'p1p1p1',
@@ -46,12 +40,6 @@ const trips = [
     accountID: 1,
     name: 'Sydney Oct 10, 2016',
     status: 'active',
-    guests: [
-      {
-        name: 'Bill Murray',
-        email: 'billmurray@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'p2p2p2',
@@ -85,12 +73,6 @@ const trips = [
     accountID: 1,
     name: 'Todays trip',
     status: 'active',
-    guests: [
-      {
-        name: 'Nicolas Cage',
-        email: 'nicolascage@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'f4f4f4',
@@ -123,12 +105,6 @@ const trips = [
     accountID: 1,
     name: 'Tuscany Jan 01, 2017',
     status: 'active',
-    guests: [
-      {
-        name: 'Willem Dafoe',
-        email: 'willemdafoe@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'a1a1a1',
@@ -161,16 +137,6 @@ const trips = [
     accountID: 1,
     name: 'Bali Feb 01, 2017',
     status: 'active',
-    guests: [
-      {
-        name: 'Ryne Sandberg',
-        email: 'rynesandberg@email.com'
-      },
-      {
-        name: 'Mark Grace',
-        email: 'markgrace@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'b2b2b2',
@@ -203,16 +169,6 @@ const trips = [
     accountID: 2,
     name: 'Bali May 01, 2017',
     status: 'active',
-    guests: [
-      {
-        name: 'Addison Russell',
-        email: 'addisonrussell@email.com'
-      },
-      {
-        name: 'Javier Baez',
-        email: 'javierbaez@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'c2c2c2',
@@ -245,12 +201,6 @@ const trips = [
     accountID: 2,
     name: 'Phuket Dec 01, 2016',
     status: 'active',
-    guests: [
-      {
-        name: 'Anthony Rizzo',
-        email: 'anthonyrizzo@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'd3d3d3',
@@ -283,16 +233,6 @@ const trips = [
     accountID: 3,
     name: 'Phuket Jan 15, 2017',
     status: 'active',
-    guests: [
-      {
-        name: 'Joe Maddon',
-        email: 'joemaddon@email.com'
-      },
-      {
-        name: 'Theo Epstein',
-        email: 'theoepstein@email.com'
-      }
-    ],
     reservations: [
       {
         reservationID: 'e3e3e3',
