@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const router = express.Router()
 const healthcheckRouter = express.Router()
-const authPlugin = require('afini-itops-authorizationplugin')
+// const authPlugin = require('afini-itops-authorizationplugin')
 // const rabbotRapper = require('afini-rabbitmq-plugin')
 
 // Configuration setup
@@ -23,7 +23,7 @@ router.route('/:accountID/:tripID').put(trip.updateTripName)
 
 // Itinerary Routes
 const itinerary = require('./middleware/itinerary')
-router.route('/:accountID/:tripID/itinerary').get(authPlugin.authorize, authPlugin.authenticate, itinerary.getItinerary)
+router.route('/:accountID/:tripID/itinerary').get(itinerary.getItinerary)
 router.route('/:accountID/:tripID/itinerary/addItem').post(itinerary.addItem)
 router.route('/:accountID/:tripID/itinerary/updateItem').put(itinerary.updateItem)
 router.route('/:accountID/:tripID/itinerary/removeItem').delete(itinerary.removeItem)
