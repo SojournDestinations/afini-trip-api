@@ -53,7 +53,7 @@ const updateItem = (req, res, next) => {
     let itemID = req.body.itemID
     let data = req.body
 
-    Trip.findOneAndUpdate({tripID: tripID, 'itinerary.itemID': itemID}, {new: true}, {$set: {'itinerary.$': data}}, {new: true}, (err, updatedTrip) => {
+    Trip.findOneAndUpdate({tripID: tripID, 'itinerary.itemID': itemID}, {new: true}, {$set: {'itinerary.$': data}}, (err, updatedTrip) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error updating itinerary item' })

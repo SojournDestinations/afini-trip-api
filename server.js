@@ -24,13 +24,12 @@ router.route('/:accountID/:tripID').put(trip.updateTripName)
 // Itinerary Routes
 const itinerary = require('./middleware/itinerary')
 router.route('/:accountID/:tripID/itinerary').get(itinerary.getItinerary)
-router.route('/:accountID/:tripID/itinerary/addItem').post(itinerary.addItem)
-router.route('/:accountID/:tripID/itinerary/updateItem').put(itinerary.updateItem)
-router.route('/:accountID/:tripID/itinerary/removeItem').delete(itinerary.removeItem)
+router.route('/:accountID/:tripID/itinerary').post(itinerary.addItem)
+router.route('/:accountID/:tripID/itinerary').put(itinerary.updateItem)
+router.route('/:accountID/:tripID/itinerary').delete(itinerary.removeItem)
 
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
-  console.log('healthcheck')
   return res.status(200).send('service: trip-api')
 })
 
