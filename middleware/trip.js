@@ -1,6 +1,6 @@
 const Trip = require('afini-common-library/models/Trip').model
 
-const getTripByReservationID = (req, res, next) => {
+const byReservationID = (req, res, next) => {
   if (req.params.reservationID) {
     let reservationID = req.params.reservationID
 
@@ -8,6 +8,8 @@ const getTripByReservationID = (req, res, next) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error finding trips by reservationID' })
+      } else if (trip === null) {
+        return res.status(200).json([])
       } else {
         return res.status(200).json(trip)
       }
@@ -25,6 +27,8 @@ const getAccountTrips = (req, res, next) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error finding trips for account' })
+      } else if (accountTrips === null) {
+        return res.status(200).json([])
       } else {
         let tripList = []
         accountTrips = accountTrips.map((accountTrip) => { return accountTrip.toObject() }) // <-- Allows accountTrip reservation to be looped over below
@@ -71,6 +75,9 @@ const updateTripName = (req, res, next) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error updating trip name' })
+      } else if (updatedTrip === null) {
+        console.log('error updating trip name')
+        return res.status(500).json({ message: 'Unable to update trip name' })
       } else {
         let finalStartDate = updatedTrip.reservations[0].checkIn // <-- Initialize start date with first reservation checkIn
         let finalEndDate = updatedTrip.reservations[0].checkOut // <-- Initialize end date with first reservation checkOut
@@ -105,7 +112,7 @@ const updateTripName = (req, res, next) => {
 }
 
 module.exports = {
-  getTripByReservationID: getTripByReservationID,
+  byReservationID: byReservationID,
   getAccountTrips: getAccountTrips,
   updateTripName: updateTripName
 }

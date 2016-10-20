@@ -19,7 +19,7 @@ require('./database/dbSetup')(dbConfig)
 const trip = require('./middleware/trip')
 router.route('/:accountID').get(trip.getAccountTrips)
 router.route('/:accountID/:tripID').put(trip.updateTripName)
-// router.route('/:accountID/reservation/:reservationID').get(trip.getTripByReservationID)
+// router.route('/:accountID/reservation/:reservationID').get(trip.byReservationID)
 
 // Itinerary Routes
 const itinerary = require('./middleware/itinerary')
