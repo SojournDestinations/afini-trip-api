@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const router = express.Router()
 const healthcheckRouter = express.Router()
-const authPlugin = require('afini-itops-authorizationplugin')
+// const authPlugin = require('afini-itops-authorizationplugin')
 // const rabbotRapper = require('afini-rabbitmq-plugin')
 
 // Configuration setup
