@@ -3,7 +3,6 @@ const app = express()
 const bodyParser = require('body-parser')
 const router = express.Router()
 const healthcheckRouter = express.Router()
-// const authPlugin = require('afini-itops-authorizationplugin')
 // const rabbotRapper = require('afini-rabbitmq-plugin')
 
 // Configuration setup
@@ -15,18 +14,22 @@ const dbConfig = config.get('db-connection')
 // MongoDB connection setup
 require('./database/dbSetup')(dbConfig)
 
+// Authorization Plugin Middleware
+const authenticate = require('afini-itops-authorizationplugin').authenticate
+const requireRoles = require('afini-itops-authorizationplugin').requireRoles
+
 // Trip Routes
 const trip = require('./middleware/trip')
-router.route('/:accountID').get(trip.getAccountTrips)
-router.route('/:accountID/:tripID').put(trip.updateTripName)
+router.route('/:accountID').get(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.getAccountTrips)
+router.route('/:accountID/:tripID').put(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.updateTripName)
 // router.route('/:accountID/reservation/:reservationID').get(trip.byReservationID)
 
 // Itinerary Routes
 const itinerary = require('./middleware/itinerary')
-router.route('/:accountID/:tripID/itinerary').get(itinerary.getItinerary)
-router.route('/:accountID/:tripID/itinerary').post(itinerary.addItem)
-router.route('/:accountID/:tripID/itinerary').put(itinerary.updateItem)
-router.route('/:accountID/:tripID/itinerary').delete(itinerary.removeItem)
+router.route('/:accountID/:tripID/itinerary').get(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.getItinerary)
+router.route('/:accountID/:tripID/itinerary').post(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.addItem)
+router.route('/:accountID/:tripID/itinerary').put(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.updateItem)
+router.route('/:accountID/:tripID/itinerary').delete(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.removeItem)
 
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
