@@ -10,7 +10,7 @@ const getItinerary = (req, res, next) => {
         console.log(err)
         return res.status(500).json({ message: 'System error finding trip itinerary' })
       } else if (trip === null) {
-        return res.status(200).json([])
+        return res.status(404).json([])
       } else {
         return res.status(200).json(trip.itinerary)
       }
@@ -40,7 +40,7 @@ const addItem = (req, res, next) => {
         return res.status(500).json({ message: 'System error adding itinerary item' })
       } else if (updatedTrip === null) {
         console.log('error adding itinerary item')
-        return res.status(500).json({ message: 'Unable to add itinerary item' })
+        return res.status(404).json({ message: 'Unable to add itinerary item' })
       } else {
         console.log('Item added to trip itinerary')
         return res.status(200).json(updatedTrip.itinerary)
@@ -64,7 +64,7 @@ const updateItem = (req, res, next) => {
         return res.status(500).json({ message: 'System error updating itinerary item' })
       } else if (updatedTrip === null) {
         console.log('error updating itinerary item')
-        return res.status(500).json({ message: 'Unable to update itinerary item' })
+        return res.status(404).json({ message: 'Unable to update itinerary item' })
       } else {
         let updatedItem
         for (let item of updatedTrip.itinerary) {

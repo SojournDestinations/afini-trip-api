@@ -9,7 +9,7 @@ const byReservationID = (req, res, next) => {
         console.log(err)
         return res.status(500).json({ message: 'System error finding trips by reservationID' })
       } else if (trip === null) {
-        return res.status(200).json([])
+        return res.status(404).json([])
       } else {
         return res.status(200).json(trip)
       }
@@ -48,7 +48,7 @@ const getAccountTrips = (req, res, next) => {
         console.log(err)
         return res.status(500).json({ message: 'System error finding trips for account' })
       } else if (accountTrips === null) {
-        return res.status(200).json([])
+        return res.status(404).json([])
       } else {
         let tripList = []
         accountTrips = accountTrips.map((accountTrip) => { return accountTrip.toObject() }) // <-- Allows accountTrip reservation to be looped over below
@@ -95,6 +95,8 @@ const updateTripName = (req, res, next) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error updating trip name' })
+      } else if (updatedTrip === null) {
+        return res.status(404).json({})
       } else {
         return res.status(200).json(updatedTrip)
       }
