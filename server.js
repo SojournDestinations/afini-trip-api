@@ -22,6 +22,7 @@ const requireRoles = require('afini-itops-authorizationplugin').requireRoles
 const trip = require('./middleware/trip')
 router.route('/:accountID').get(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.getAccountTrips)
 router.route('/:accountID/:tripID').put(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.updateTripName)
+router.route('/:accountID/:tripID').get(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.getTrip)
 // router.route('/:accountID/reservation/:reservationID').get(trip.byReservationID)
 
 // Itinerary Routes

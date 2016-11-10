@@ -19,6 +19,24 @@ const byReservationID = (req, res, next) => {
   }
 }
 
+const getTrip = (req, res, next) => {
+  if (req.params.accountID && req.params.tripID) {
+    let accountID = req.params.accountID
+    let tripID = req.params.tripID
+
+    Trip.findOne({accountID: accountID, tripID: tripID}, (err, trip) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ message: 'System error finding trip' })
+      } else {
+        return res.status(200).json(trip)
+      }
+    })
+  } else {
+    return res.status(400).json({ message: 'Missing account and/or userID from params' })
+  }
+}
+
 const getAccountTrips = (req, res, next) => {
   if (req.params.accountID) {
     let accountID = req.params.accountID
@@ -87,5 +105,6 @@ const updateTripName = (req, res, next) => {
 module.exports = {
   byReservationID: byReservationID,
   getAccountTrips: getAccountTrips,
-  updateTripName: updateTripName
+  updateTripName: updateTripName,
+  getTrip: getTrip
 }
