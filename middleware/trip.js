@@ -28,6 +28,8 @@ const getTrip = (req, res, next) => {
       if (err) {
         console.log(err)
         return res.status(500).json({ message: 'System error finding trip' })
+      } else if (trip === null) {
+        return res.status(404).json({})
       } else {
         return res.status(200).json(trip)
       }
