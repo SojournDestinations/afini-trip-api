@@ -31,7 +31,27 @@ const getTrip = (req, res, next) => {
       } else if (trip === null) {
         return res.status(404).json({})
       } else {
-        return res.status(200).json(trip)
+        let tripObj = trip.toObject()
+        let finalStartDate = tripObj.reservations[0].checkIn // <-- Initialize start date with first reservation checkIn
+        let finalEndDate = tripObj.reservations[0].checkOut // <-- Initialize end date with first reservation checkOut
+        for(let reservation of tripObj.reservations) {
+          if (reservation.checkIn < finalStartDate) {
+            finalStartDate = reservation.checkIn // <-- An additional reservation is on the trip with an earlier checkIn date
+          }
+          if (reservation.checkOut > finalEndDate) {
+            finalEndDate = reservation.checkOut // <-- An additional reservation is on the trip with a later checkOut date
+          }
+        }
+        let tripData = {
+          tripID: tripObj.tripID,
+          accountID: tripObj.accountID,
+          name: tripObj.name,
+          start: finalStartDate,
+          end: finalEndDate,
+          status: tripObj.status,
+          reservations: tripObj.reservations
+        }
+        return res.status(200).json(tripData)
       }
     })
   } else {
