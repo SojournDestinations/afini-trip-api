@@ -118,6 +118,7 @@ const updateTripName = (req, res, next) => {
       } else if (updatedTrip === null) {
         return res.status(404).json({})
       } else {
+        console.log('trip ' + tripID + ' updated name to ' + updatedTrip.name)
         return res.status(200).json(updatedTrip)
       }
     })
