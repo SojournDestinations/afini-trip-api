@@ -31,10 +31,9 @@ const getTrip = (req, res, next) => {
       } else if (trip === null) {
         return res.status(404).json({})
       } else {
-        let tripObj = trip.toObject()
-        let finalStartDate = tripObj.reservations[0].checkIn // <-- Initialize start date with first reservation checkIn
-        let finalEndDate = tripObj.reservations[0].checkOut // <-- Initialize end date with first reservation checkOut
-        for(let reservation of tripObj.reservations) {
+        let finalStartDate = trip.reservations[0].checkIn // <-- Initialize start date with first reservation checkIn
+        let finalEndDate = trip.reservations[0].checkOut // <-- Initialize end date with first reservation checkOut
+        for (let reservation of trip.reservations) {
           if (reservation.checkIn < finalStartDate) {
             finalStartDate = reservation.checkIn // <-- An additional reservation is on the trip with an earlier checkIn date
           }
@@ -42,14 +41,15 @@ const getTrip = (req, res, next) => {
             finalEndDate = reservation.checkOut // <-- An additional reservation is on the trip with a later checkOut date
           }
         }
+
         let tripData = {
-          tripID: tripObj.tripID,
-          accountID: tripObj.accountID,
-          name: tripObj.name,
+          tripID: trip.tripID,
+          accountID: trip.accountID,
+          name: trip.name,
           start: finalStartDate,
           end: finalEndDate,
-          status: tripObj.status,
-          reservations: tripObj.reservations
+          status: trip.status,
+          reservations: trip.reservations
         }
         return res.status(200).json(tripData)
       }
@@ -71,7 +71,6 @@ const getAccountTrips = (req, res, next) => {
         return res.status(404).json([])
       } else {
         let tripList = []
-        accountTrips = accountTrips.map((accountTrip) => { return accountTrip.toObject() }) // <-- Allows accountTrip reservation to be looped over below
 
         for (let trip of accountTrips) {
           let finalStartDate = trip.reservations[0].checkIn // <-- Initialize start date with first reservation checkIn
@@ -119,7 +118,27 @@ const updateTripName = (req, res, next) => {
         return res.status(404).json({})
       } else {
         console.log('trip ' + tripID + ' updated name to ' + updatedTrip.name)
-        return res.status(200).json(updatedTrip)
+        let finalStartDate = updatedTrip.reservations[0].checkIn // <-- Initialize start date with first reservation checkIn
+        let finalEndDate = updatedTrip.reservations[0].checkOut // <-- Initialize end date with first reservation checkOut
+        for (let reservation of updatedTrip.reservations) {
+          if (reservation.checkIn < finalStartDate) {
+            finalStartDate = reservation.checkIn // <-- An additional reservation is on the updatedTrip with an earlier checkIn date
+          }
+          if (reservation.checkOut > finalEndDate) {
+            finalEndDate = reservation.checkOut // <-- An additional reservation is on the updatedTrip with a later checkOut date
+          }
+        }
+
+        let tripData = {
+          tripID: updatedTrip.tripID,
+          accountID: updatedTrip.accountID,
+          name: updatedTrip.name,
+          start: finalStartDate,
+          end: finalEndDate,
+          status: updatedTrip.status,
+          reservations: updatedTrip.reservations
+        }
+        return res.status(200).json(tripData)
       }
     })
   } else {
