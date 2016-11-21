@@ -14,6 +14,11 @@ const dbConfig = config.get('db-connection')
 // MongoDB connection setup
 require('./database/dbSetup')(dbConfig)
 
+// Healthcheck - for load balancers
+router.route('/healthcheck').get((req, res) => {
+  return res.status(200).send('service: trip-api')
+})
+
 // Authorization Plugin Middleware
 const authenticate = require('afini-itops-authorizationplugin').authenticate
 const requireRoles = require('afini-itops-authorizationplugin').requireRoles
@@ -35,11 +40,6 @@ router.route('/:accountID/:tripID/itinerary').delete(authenticate, requireRoles(
 // Healthcheck - for load balancers
 healthcheckRouter.route('/healthcheck').get((req, res) => {
   return res.status(200).send('service: trip-api')
-})
-
-healthcheckRouter.route('/healthbad').get((req, res) => {
-  console.log('throwing error')
-  someUnknownObject.produceError()
 })
 
 app.use((req, res, next) => {
