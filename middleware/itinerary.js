@@ -31,7 +31,7 @@ const addItem = (req, res, next) => {
       time: data.time,
       description: data.description,
       type: data.type,
-      status: data.status
+      status: data.status || 'pending'
     }
 
     Trip.findOneAndUpdate({tripID: tripID}, {$push: {itinerary: newItem}}, {new: true}, (err, updatedTrip) => {
