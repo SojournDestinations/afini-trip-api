@@ -43,7 +43,7 @@ const addItem = (req, res, next) => {
         return res.status(404).json({ message: 'Unable to add itinerary item' })
       } else {
         console.log('Item added to trip itinerary')
-        return res.status(200).json(updatedTrip.itinerary)
+        return res.status(200).json(newItem)
       }
     })
   } else {
