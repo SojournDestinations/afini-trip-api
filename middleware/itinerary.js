@@ -29,6 +29,8 @@ const addItem = (req, res, next) => {
       itemID: uuid.v4(),
       date: data.date,
       time: data.time,
+      cost: data.cost,
+      location: data.location,
       description: data.description,
       type: data.type,
       status: data.status || 'pending'
