@@ -26,6 +26,7 @@ const excludeRoles = require('afini-itops-authorizationplugin').excludeRoles
 
 // Trip Routes
 const trip = require('./middleware/trip')
+router.route('/all').get(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.getAll)
 router.route('/:accountID').get(authenticate, excludeRoles(['prospect']), trip.getAccountTrips)
 router.route('/:accountID/:tripID').put(authenticate, excludeRoles(['prospect']), trip.updateTripName)
 router.route('/:accountID/:tripID').get(authenticate, excludeRoles(['prospect']), trip.getTrip)

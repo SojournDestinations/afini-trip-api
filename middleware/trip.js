@@ -1,5 +1,16 @@
 const Trip = require('afini-common-library/models/Trip').model
 
+const getAll = (req, res, next) => {
+  Trip.find({}, (err, allTrips) => {
+    if (err) {
+      console.log(err)
+      return res.status(500).json({ message: 'System error retrieving all trips' })
+    } else {
+      return res.status(200).json(allTrips)
+    }
+  })
+}
+
 const byReservationID = (req, res, next) => {
   if (req.params.reservationID) {
     let reservationID = req.params.reservationID
@@ -150,5 +161,6 @@ module.exports = {
   byReservationID: byReservationID,
   getAccountTrips: getAccountTrips,
   updateTripName: updateTripName,
-  getTrip: getTrip
+  getTrip: getTrip,
+  getAll: getAll
 }
