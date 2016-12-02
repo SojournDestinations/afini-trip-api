@@ -27,13 +27,13 @@ const excludeRoles = require('afini-itops-authorizationplugin').excludeRoles
 // Trip Routes
 const trip = require('./middleware/trip')
 router.route('/:accountID').get(authenticate, excludeRoles(['prospect']), trip.getAccountTrips)
-router.route('/:accountID/:tripID').put(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), trip.updateTripName)
+router.route('/:accountID/:tripID').put(authenticate, excludeRoles(['prospect']), trip.updateTripName)
 router.route('/:accountID/:tripID').get(authenticate, excludeRoles(['prospect']), trip.getTrip)
 // router.route('/:accountID/reservation/:reservationID').get(trip.byReservationID)
 
 // Itinerary Routes
 const itinerary = require('./middleware/itinerary')
-router.route('/:accountID/:tripID/itinerary').get(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.getItinerary)
+router.route('/:accountID/:tripID/itinerary').get(authenticate, excludeRoles(['prospect']), itinerary.getItinerary)
 router.route('/:accountID/:tripID/itinerary').post(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.addItem)
 router.route('/:accountID/:tripID/itinerary').put(authenticate, excludeRoles(['prospect']), itinerary.updateItem)
 router.route('/:accountID/:tripID/itinerary').delete(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.removeItem)
