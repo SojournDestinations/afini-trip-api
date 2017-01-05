@@ -1,12 +1,24 @@
 const Trip = require('afini-common-library/models/Trip').model
 
 const getAll = (req, res, next) => {
-  Trip.find({}, (err, allTrips) => {
+  Trip.find({status: 'active'}, (err, allTrips) => {
     if (err) {
       console.log(err)
       return res.status(500).json({ message: 'System error retrieving all trips' })
     } else {
-      return res.status(200).json(allTrips)
+      let returnTripList = []
+
+      // Filter out trips in the past
+      for (let trip of allTrips) {
+        for (let reservation of trip.reservations) {
+          let tripEndDate = new Date(reservation.checkOut)
+          if (tripEndDate > new Date()) {
+            returnTripList.push(trip)
+          }
+        }
+      }
+
+      return res.status(200).json(returnTripList)
     }
   })
 }
