@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const router = express.Router()
-const healthcheckRouter = express.Router()
 // const rabbotRapper = require('afini-rabbitmq-plugin')
 
 // Configuration setup
@@ -13,10 +12,23 @@ const dbConfig = config.get('db-connection')
 
 // MongoDB connection setup
 require('./database/dbSetup')(dbConfig)
+const mongoose = require('mongoose')
 
+const nocache = (req, res, next) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+  res.header('Expires', '-1')
+  res.header('Pragma', 'no-cache')
+  next()
+}
 // Healthcheck - for load balancers
-router.route('/healthcheck').get((req, res) => {
-  return res.status(200).send('service: trip-api')
+router.route('/healthcheck').get(nocache, (req, res) => {
+  let dbHealth = mongoose.connection.readyState
+  if (dbHealth !== 1) {
+    console.log('mongo disconnected')
+    return res.status(500).send('error: database disconnected')
+  } else {
+    return res.status(200).send('service: trip-api')
+  }
 })
 
 // Authorization Plugin Middleware
@@ -39,11 +51,6 @@ router.route('/:accountID/:tripID/itinerary').post(authenticate, requireRoles(['
 router.route('/:accountID/:tripID/itinerary').put(authenticate, excludeRoles(['prospect']), itinerary.updateItem)
 router.route('/:accountID/:tripID/itinerary').delete(authenticate, requireRoles(['lifestyle', 'lifestyle plus']), itinerary.removeItem)
 
-// Healthcheck - for load balancers
-healthcheckRouter.route('/healthcheck').get((req, res) => {
-  return res.status(200).send('service: trip-api')
-})
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
@@ -54,7 +61,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/trips', router)
-app.use('/', healthcheckRouter)
 app.listen(port)
 
 // RabbitMQ connection setup
