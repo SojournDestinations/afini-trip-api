@@ -60,6 +60,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use('/api/trips', router)
 app.use('/trips', router)
 app.listen(port)
 
